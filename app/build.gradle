@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    sourceSets.main {
+        jniLibs.srcDir "/jniLibs"
+    }
+
+    defaultConfig {
+        applicationId "com.vuforia.vuforiatest"
+        minSdkVersion 21
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    archivesBaseName = rootProject.projectDir.getName()
+	
+    buildTypes {
+        release {
+            minifyEnabled false
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
+    }
+}
+
+dependencies {
+    wearApp project(':wear')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile files('libs/vuforia/Vuforia.jar')
+    compile 'com.google.android.gms:play-services:8.3.0'
+}
